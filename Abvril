@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cálculo de Horas Extras</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background: #222;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+        input {
+            background: #333;
+            color: white;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Factor para determinar horas extras</h1>
+    <div class="container">
+        <label for="horasTrabajadas">Horas trabajadas quincenales:</label>
+        <input type="number" id="horasTrabajadas" placeholder="Ingrese las horas">
+        
+        <label for="horasNormales">Horas normales quincenales:</label>
+        <input type="number" id="horasNormales" value="22" readonly>
+        
+        <label for="factor">Factor de horas extras:</label>
+        <input type="number" id="factor" value="11.91" readonly>
+        
+        <button onclick="calcularHorasExtras()">Calcular</button>
+        <h2 id="resultado"></h2>
+    </div>
+
+    <script>
+        function calcularHorasExtras() {
+            let horasTrabajadas = parseFloat(document.getElementById('horasTrabajadas').value) || 0;
+            let horasNormales = parseFloat(document.getElementById('horasNormales').value);
+            let factor = parseFloat(document.getElementById('factor').value);
+            
+            let horasExtras = horasTrabajadas - horasNormales;
+            let pagoHorasExtras = horasExtras > 0 ? horasExtras * factor : 0;
+            
+            document.getElementById('resultado').innerText = `Pago por horas extras: $${pagoHorasExtras.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
